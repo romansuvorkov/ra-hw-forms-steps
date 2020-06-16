@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  width: 100%;
+  height: 100%;
 }
 
 .App-logo {
@@ -35,4 +37,61 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.steps_wrapper {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.interface_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.input_wrappers {
+  display: flex;
+  flex-direction: column;
+}
+
+.submit_btn {
+  height: 50%;
+}
+
+.step {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.redact {
+  display: block;
+  background-image: url("./img/pencil.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+.delete {
+  display: block;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+.step_interface {
+  display: flex;
+}
+
+.steps {
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 10px;
 }

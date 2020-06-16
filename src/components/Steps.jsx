@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import InputInterface from './InputInterface';
 import MessageField from './MessageField';
-import shortid from "shortid";
-import sortArr from './sortArr';
 import ModelStep from './ModelStep';
 import parseDate from './parseDate';
 
@@ -12,26 +10,25 @@ export default function Steps() {
         date: ''
     });
 
+    const [steps, setSteps] = useState([]);
+
+    const handleRemove = (id) => {
+        setSteps((prevSteps) => prevSteps.filter((o) => o.id !== id));
+    }
+
     const handleDistanceChange = value => {
         setForm(prevForm => ({...prevForm, distance: value}));
     }
 
     const handleDateChange = value => {
+        console.log(value);
+        console.log(typeof value);
         setForm(prevForm => ({...prevForm, date: value}));
     }
 
-    const [steps, setSteps] = useState([]);
-
     const handleSubmit = () => {
         const searchID = parseDate(form.date);
-        // const newStep = new ModelStep(form.date, form.distance);
         let isDate = false;
-        // for (let item of steps) {
-        //   if (item.id === newStep.id) {
-        //     isDate = true;
-        //     item.distance = item.distance + newStep.distance;
-        //   }
-        // }
         for (let item of steps) {
             if (item.id === searchID) {
               isDate = true;
@@ -55,7 +52,12 @@ export default function Steps() {
             < InputInterface onSubmit={handleSubmit} 
                              onDistanceChange={handleDistanceChange} 
                              onDateChange={handleDateChange} />
-            < MessageField steps={steps} />
+            <div className="step">
+                <span className="step_date">Дата (ДД.ММ.ГГГГ)</span>
+                <span className="step_distance">Пройдено км</span>
+                <span className="actions">Действия</span>
+            </div>
+            < MessageField steps={steps} onRemove={handleRemove} />
         </div>
     );
 }
