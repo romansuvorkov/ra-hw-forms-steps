@@ -1,19 +1,31 @@
 import React, { useState } from 'react';
+import ModelStep from './ModelStep';
 
 export default function InputInterface(props) {
 
-    const handleSubmit = event => {
-        event.preventDefault();
-        props.onSubmit();
-    };
+    const [form, setForm] = useState({
+        distance: '',
+        date: ''
+    });
 
-    const handleDistanceChange = (event) => {
-        props.onDistanceChange(event.target.value);
+    const handleDistanceChange = event => {
+        const {value} = event.target;
+        setForm(prevForm => ({...prevForm, distance: value}));
     };
 
     const handleDateChange = (event) => {
-        props.onDateChange(event.target.value);
+        const {value} = event.target;
+        setForm(prevForm => ({...prevForm, date: value}));
     };
+
+    const {onAdd} = props;
+
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(form);
+        onAdd(new ModelStep(form.date, form.distance));
+    }
 
     return (
         <form className="interface_wrapper" onSubmit={handleSubmit}>
